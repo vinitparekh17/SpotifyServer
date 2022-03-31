@@ -21,7 +21,7 @@ app.post("/refresh", (req, res) => {
   const spotifyApi = new SpotifyWebApi({
     clientId: process.env.client_id,
     clientSecret: process.env.client_secret,
-    redirectUri: `https://icemod.herokuapp.com`,
+    redirectUri: `http://localhost:3000`,
     refreshToken: refreshToken
   })
 
@@ -44,7 +44,7 @@ app.post("/login", (req, res) => {
   const spotifyApi = new SpotifyWebApi({
     clientId: process.env.client_id,
     clientSecret: process.env.client_secret,
-    redirectUri: `https://icemod.herokuapp.com/`,
+    redirectUri: `http://localhost:3000`,
   })
 
   spotifyApi
