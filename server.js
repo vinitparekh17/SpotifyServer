@@ -2,8 +2,11 @@ require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")
-const lyricsFinder = require("lyrics-finder")
+// const lyricsFinder = require("lyrics-finder");
+const Genius = require('genius-lyrics')
+const Client = new Genius.Client('C7BBc5ysns2ZvPug4PrxRZ2AcJ1meSU31zZ565DOnrigR4j8pgu9G9Ur01Ls27QN')
 const SpotifyWebApi = require("spotify-web-api-node")
+const { query } = require("express")
 
 const app = express()
 app.use(cors())
@@ -56,9 +59,18 @@ app.post("/login", (req, res) => {
 })
 
 app.get("/lyrics", async (req, res) => {
-  const lyrics =
-    (await lyricsFinder(req.query.artist, req.query.track)) || "No Lyrics Found"
+  console.log(req.query);
+  // const lyrics = await lyricsFinder(req.query.artist, req.query.track) || "No Lyrics Found";
+  const searches = await Client.songs.search(req.query.track);
+  const firstSong = searches[0];
+  const lyrics = await firstSong.lyrics();
   res.json({ lyrics })
 })
 
-app.listen(3001)
+app.listen(process.env.PORT || 3001, (e) => {
+  if (!e) {
+    console.log('Server is up and running');
+  } else {
+    console.log(e);
+  }
+})
