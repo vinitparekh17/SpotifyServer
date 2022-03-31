@@ -1,12 +1,11 @@
 require("dotenv").config()
-const express = require("express")
-const cors = require("cors")
-const bodyParser = require("body-parser")
-// const lyricsFinder = require("lyrics-finder");
-const Genius = require('genius-lyrics')
-const Client = new Genius.Client('C7BBc5ysns2ZvPug4PrxRZ2AcJ1meSU31zZ565DOnrigR4j8pgu9G9Ur01Ls27QN')
-const SpotifyWebApi = require("spotify-web-api-node")
-const { query } = require("express")
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const Genius = require('genius-lyrics');
+const Client = new Genius.Client('C7BBc5ysns2ZvPug4PrxRZ2AcJ1meSU31zZ565DOnrigR4j8pgu9G9Ur01Ls27QN');
+const SpotifyWebApi = require("spotify-web-api-node");
+const { query } = require("express");
 
 const app = express()
 app.use(cors())
